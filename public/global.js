@@ -7,54 +7,34 @@ window.onload = function() {
   prevLink.click = function() {return false};
 }
 
-var x = 0
+var num = 0  // Beginning the counter for the slide order
 
 function findNextSlide() {
-  var y = x += 1
-  var js_req = new XMLHttpRequest;
-  js_req.open("post", "http://localhost:4567/slides/find/" + y);
-  js_req.send();
-  js_req.addEventListener("load", function(){
-    r = JSON.parse(js_req.response);
-      var h2 = document.createElement("h2");
-      var p1 = document.createElement("p");
-      var p2 = document.createElement("p");
-      var p3 = document.createElement("p");
-      var everything = document.createElement("li");
-      
-      var id = document.createTextNode("ID: " + r.id);
-      var studentName = document.createTextNode("Name: " + r.title);
-      var age = document.createTextNode("Age: " + r.text);      
-
-      everything.appendChild(h2.appendChild(id));
-      everything.appendChild(p1.appendChild(studentName));
-      everything.appendChild(p2.appendChild(age));
-      
-      document.getElementById("nextSlide").appendChild(everything); 
-  }, false);
+  if (num === 3) {
+    alert("Sorry, you've reached the end of the slideshow.")
+  } else {
+    var order = num += 1  // Increments slide order by 1 when clicking next
+    var js_req = new XMLHttpRequest;
+    js_req.open("post", "http://localhost:4567/slides/find/" + order);
+    js_req.send();
+    js_req.addEventListener("load", function(){
+      r = JSON.parse(js_req.response);
+      document.getElementById("slide").innerHTML=r.title + "<br>" + r.text; 
+    }, false);
+  }
 }
 
 function findPrevSlide() {
-  var z = x -= 1
-  var js_req = new XMLHttpRequest;
-  js_req.open("post", "http://localhost:4567/slides/find/" + z);
-  js_req.send();
-  js_req.addEventListener("load", function(){
-    r = JSON.parse(js_req.response);
-      var h2 = document.createElement("h2");
-      var p1 = document.createElement("p");
-      var p2 = document.createElement("p");
-      var p3 = document.createElement("p");
-      var everything = document.createElement("li");
-      
-      var id = document.createTextNode("ID: " + r.id);
-      var studentName = document.createTextNode("Name: " + r.title);
-      var age = document.createTextNode("Age: " + r.text);      
-
-      everything.appendChild(h2.appendChild(id));
-      everything.appendChild(p1.appendChild(studentName));
-      everything.appendChild(p2.appendChild(age));
-      
-      document.getElementById("nextSlide").appendChild(everything); 
-  }, false);
+  if (num === 1) {
+    alert("You are at the beginning of the slideshow.")
+  } else {
+    var order = num -= 1  // Decrements slide order by 1 when clicking previous
+    var js_req = new XMLHttpRequest;
+    js_req.open("post", "http://localhost:4567/slides/find/" + order);
+    js_req.send();
+    js_req.addEventListener("load", function(){
+      r = JSON.parse(js_req.response);
+      document.getElementById("slide").innerHTML=r.title + "<br>" + r.text; 
+    }, false);
+  }
 }
