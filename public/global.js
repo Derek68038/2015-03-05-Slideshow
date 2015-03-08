@@ -3,18 +3,8 @@ window.onload = function() {
   prevLink = document.getElementById("prevSlide");
   nextLink.addEventListener("click", findNextSlide);
   prevLink.addEventListener("click", findPrevSlide);
-  nextLink.click = function() {return true};
-  prevLink.click = function() {return true};
-}
-
-function findObject() {
-var js_req = new XMLHttpRequest;
-  js_req.open("post", "http://localhost:4567/slides/find");
-  js_req.send(new FormData(findForm));
-  js_req.addEventListener("load", function(){
-    r = JSON.parse(js_req.response);
-    alert("Here is the slide info - Id: " + r.id + ", Title: " + r.title + ", Text: " + r.text);
-  }, false);
+  nextLink.click = function() {return false};
+  prevLink.click = function() {return false};
 }
 
 var x = 0
