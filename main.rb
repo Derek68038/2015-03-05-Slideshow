@@ -1,14 +1,15 @@
 require "sinatra"
 require "json"
 require "sqlite3"
+require "pry"
 
 DATABASE = SQLite3::Database.new("slides.db")
 DATABASE.results_as_hash = true
 
-require_relative "slide"
+require_relative "models/slide"
 
 get "/" do
-  erb :homepage
+  erb :"home/homepage"
 end
 
 post "/slides/find/:id" do

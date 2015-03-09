@@ -19,7 +19,9 @@ function findNextSlide() {
     js_req.send();
     js_req.addEventListener("load", function(){
       r = JSON.parse(js_req.response);
-      document.getElementById("slide").innerHTML=r.title + "<br>" + r.text; 
+      document.getElementById("title").innerHTML=r.title;
+      document.getElementById("text").innerHTML=r.text; 
+       
     }, false);
   }
 }
@@ -34,7 +36,8 @@ function findPrevSlide() {
     js_req.send();
     js_req.addEventListener("load", function(){
       r = JSON.parse(js_req.response);
-      document.getElementById("slide").innerHTML=r.title + "<br>" + r.text; 
+      document.getElementById("title").innerHTML=r.title;
+      document.getElementById("text").innerHTML=r.text; 
     }, false);
   }
 }
