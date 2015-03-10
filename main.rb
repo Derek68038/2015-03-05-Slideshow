@@ -1,7 +1,8 @@
+require "rubygems"
+require "bundler/setup"
 require "sinatra"
 require "json"
 require "sqlite3"
-require "pry"
 
 DATABASE = SQLite3::Database.new("slides.db")
 DATABASE.results_as_hash = true
